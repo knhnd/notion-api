@@ -12,6 +12,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.15",
     "axios": "^1.6.8",
+    "csv": "^6.3.8",
     "dotenv": "^16.4.5"
   }
 }

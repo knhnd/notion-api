@@ -22,6 +22,9 @@ Notion と Notion Database を操作するための機能いろいろ
 - `.env` に `SECRET` と `DatabaseID` を記述
     - `.env` は `.gitignore` に入れるのを忘れない
 
+## Notion API
+
+### プロパティ
 
 ## Links
 

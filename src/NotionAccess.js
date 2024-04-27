@@ -11,10 +11,46 @@ const notion = new Client({auth: secret})
 export default class NotionAccess {
 
     // Create Method
-    static async createData() {}
+    static async createData() {
+        try {
+            // const res = await notion.databases.query({
+            //     database_id: databaseId,
+            //     propaties: {
+            //         "Name": {
+            //             "title": [
+            //                 {
+            //                     "text": {
+            //                         "content": "株式会社SAMPLE"
+            //                     }
+            //                 }
+            //             ]
+            //         },
+            //         "URL": {
+            //             "url": "https://sample.jp"
+            //         },
+            //         "郵便番号": {},
+            //         "住所": {},
+            //         "担当部署": {},
+            //         "担当者": {},
+            //         "メールアドレス": {
+            //             "email": "staff@sample.com"
+            //         },
+            //         "電話番号": {},
+            //         "コンタクト教員": {},
+            //         "担当教員": {},
+            //         "参加可否": {},
+            //         "実習参加": {},
+            //         "備考": {},
+            //     }
+            // })
+          
+        } catch(err) {
+            console.error(err);
+        }
+    }
 
     // Read Method
-    static async getDataById(itemId) {
+    static async getItemById(itemId) {
         try {
             const data = await notion.databases.query({
                 database_id: databaseId,
