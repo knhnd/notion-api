@@ -20,8 +20,8 @@ export default class NotionAccess {
       }
       const notionProperty = GenerateContents.notionProperty(databaseId, csvObjects);
       console.log('notionProperty: ', notionProperty);
-
-      // const res = await notion.databases.query({});
+      const res = await notion.databases.query(notionProperty);
+      return res;
     } catch (err) {
       console.error(err);
     }
@@ -46,7 +46,7 @@ export default class NotionAccess {
     }
   }
 
-  // Update Method
+  //TODO: Update Method
 
-  // Delete Method
+  //TODO: Delete Method
 }

@@ -4,17 +4,18 @@ Notion と Notion Database を操作するための機能いろいろ
 
 ## 実装
 
-公式が出している JavaScript の SDK を利用して実装。JS 以外の SDK もあるが公式のものではない。
+公式が出している JavaScript の SDK を利用して実装。
 
 ### セットアップ
 
-- Node.js のプロジェクトを初期化 - `npm init` - `package.json` で ES モジュールを有効化
+- Node.js のプロジェクトを作成
+- `npm init` - `package.json` で ES モジュールを有効化
 
-      ```package.json
-      {
-          "type": "module"
-      }
-      ```
+  ```package.json
+  {
+      "type": "module"
+  }
+  ```
 
 - SDK と必要なパッケージをインストール
   - `npm install @notionhq/client`
@@ -23,6 +24,8 @@ Notion と Notion Database を操作するための機能いろいろ
   - `.env` は `.gitignore` に入れるのを忘れない
 
 ## Notion API
+
+- [Working with databases](https://developers.notion.com/docs/working-with-databases)
 
 ### プロパティ
 
