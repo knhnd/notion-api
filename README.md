@@ -12,7 +12,7 @@ JavaScript 以外の言語の SDK は公式ではないので注意。
 - Node.js のプロジェクトを作成
 - `npm init` - `package.json` で ES モジュールを有効化
 
-  ```package.json
+  ```json
   {
       "type": "module"
   }
