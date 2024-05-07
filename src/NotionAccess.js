@@ -51,14 +51,14 @@ export default class NotionAccess {
   }
 
   // Read Method
-  static async getPageById(pageId) {
+  static async getPageById(id) {
     try {
       const data = await notion.databases.query({
         database_id: databaseId,
         filter: {
           property: 'ID',
           number: {
-            equals: pageId,
+            equals: id,
           },
         },
       });
@@ -109,7 +109,63 @@ export default class NotionAccess {
     }
   }
 
-  //TODO: Update Method
+  // Update Method
+  static async updatePropertiesFromCsv(id, filePath) {
+    try {
+      // 更新対象のページ
+      const data = await notion.databases.query({
+        database_id: databaseId,
+        filter: {
+          property: 'ID',
+          number: {
+            equals: id,
+          },
+        },
+      });
+      const pageId = data.results[0].id;
 
-  //TODO: Delete Method
+      // 更新用のデータ
+      const csvObject = await Preprocessing.parseCSV(filePath);
+      if (csvObject.length === 0) {
+        return;
+      }
+      const notionProperty = await GenerateContents.notionProperty(databaseId, csvObject[0]);
+
+      // TODO: めんどくさくなって雑なので要リファクタ
+      delete notionProperty.parent;
+      notionProperty.page_id = pageId;
+      // GenerateContents.notionPropertyID() はIDに1を加算するが更新の時にID変更されたら困るので更新元のデータで上書き
+      notionProperty.properties.ID.number = data.results[0].properties.ID.number
+
+      // プロパティの更新
+      const res = await notion.pages.update(notionProperty);
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Delete Method
+  // 実際には Delete ではなく archive してゴミ箱に移すだけ
+  static async deletePageById(id) {
+    try {
+      const data = await notion.databases.query({
+        database_id: databaseId,
+        filter: {
+          property: 'ID',
+          number: {
+            equals: id,
+          },
+        },
+      });
+      const dataForArchive = {
+        page_id: data.results[0].id,
+        archived: true,
+      }
+      const res = await notion.pages.update(dataForArchive);
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }

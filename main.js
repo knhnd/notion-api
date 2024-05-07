@@ -8,7 +8,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // TODO: Web API はまだ実験段階なので全部 GET で関数叩いているだけ
 
+// 実験用の変数たち
 const filePath = "./data/data.csv"
+const id = 894;
+const num = 50;
 
 app.get('/', (req, res) => {
     res.json([
@@ -31,7 +34,7 @@ app.get('/createPagesFromCsv', async (req, res) => {
 });
 
 app.get('/getPageById', async (req, res) => {
-    const pageId = ""
+    const id = ""
     const result = await NotionAccess.getPageById(pageId);
     res.json([
         { response: result },
@@ -46,15 +49,24 @@ app.get('/getLatestData', async (req, res) => {
 });
 
 app.get('/getDataBySpecifyingNumber', async (req, res) => {
-    const num = 50;
     const result = await NotionAccess.getDataBySpecifyingNumber(num);
     res.json([
         { response: result },
     ]);
 });
 
+app.get('/updatePropertiesByCsv', async (req, res) => {
+    const result = await NotionAccess.updatePropertiesFromCsv(id, filePath);
+    res.json([
+        { response: result },
+    ]);
+});
+
+app.get('/deletePageById', async (req, res) => {
+    const result = await NotionAccess.deletePageById(id);
+    res.json([
+        { response: result },
+    ]);
+});
+
 app.listen(3000, () => console.log('Local Server is Running on http://localhost:3000/'));
-
-
-
-// const res = await NotionAccess.getDataBySpecifyingNumber(50)

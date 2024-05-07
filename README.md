@@ -65,10 +65,28 @@ const res = await notion.database.query({
 })
 ```
 
+### データの更新
+データの更新では更新対象のページのページIDを用いてプロパティを指定することで更新可能
+
+`const res = await notion.pages.update(dataForArchive);`
+
+プロパティのオブジェクトには更新するものだけを詰めればOK
+
+### データの削除
+Notion API ではデータを完全削除することはできない。その代わりアーカイブすることでゴミ箱に移すことができる。
+データの更新と同じ方法で `notion.pages.update(object)` の中に `archive: true` とするだけ
+
+```js
+const updateObject = {
+  page_id: pageId,
+  archived: true,
+}
+```
+
 ### プロパティ
 
 Notion のプロパティを JavaScript から操作する場合、Object として扱う。
-設定できる値と書式は以下の通り。
+設定できる値と書式の例（一部のみ）は以下の通り。
 
 ```js
 const notionProperty = {
@@ -114,4 +132,5 @@ const notionProperty = {
 ## Links
 
 - [Notion Developers](https://developers.notion.com/)
+- [Notion Database Propaties](https://developers.notion.com/reference/property-object)
 - [Notion APIからDBアイテムを追加するときのプロパティごとの書き方](https://www.6666666.jp/blog/post/20210617/)
